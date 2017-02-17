@@ -5,6 +5,11 @@ import signal
 import sys, os
 import time
 
+try:
+    file = open("/data/signals.log", 'r')
+except IOError:
+    file = open("/data/signals.log", 'w')
+
 def signal_term_handler(signal, frame):
     with open("/data/signals.log","a+") as f:
         f.write('got SIGTERM, cleaning up main.py\n')
