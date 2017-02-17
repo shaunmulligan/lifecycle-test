@@ -1,0 +1,10 @@
+local_resinos:
+  app-name: simple-demo
+  build-triggers:
+    - Dockerfile: a8b15066d355f70bc41a0f88e7cd8f33364a0c1b5b133664f7c86c4ee0433765
+  environment:
+    - RESIN_vars=There Are None for resinOS Unmanaged
+destination: /usr/src/app
+ignore:
+  - .git
+  - Dockerfile
