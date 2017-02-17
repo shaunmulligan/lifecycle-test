@@ -10,8 +10,9 @@ COPY . .
 # /usr/src/app/
 #           |── Dockerfile
 #           └── project
+#               |── startup.sh
 #               └── main.py
 
 ENV INITSYSTEM=on
 
-CMD ["python","-u","project/main.py"]
+CMD ["bash","project/startup.sh"]
