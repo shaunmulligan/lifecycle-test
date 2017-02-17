@@ -5,22 +5,13 @@ import signal
 import sys, os
 import time
 
-def receive_signal(signum, stack):
-    if signum in [1,2,3,15]:
-        with open("/data/signals.log", "a+") as f:
-            f.write('Caught signal %s, cleaning up and exiting main.py.' %(str(signum)))
-            f.flush()
-            os.fsync(f.fileno())
-        print 'Caught signal %s, cleaning up and exiting main.py.' %(str(signum))
-        sys.exit(0)
-    else:
-        print 'Caught signal %s, ignoring.' %(str(signum))
+def signal_term_handler(signal, frame):
+    with open("/data/signals.log","a+") as f:
+        f.write('got SIGTERM, cleaning up main.py\n')
+    print 'got SIGTERM, cleaning up main.py\n'
+    sys.exit(0)
 
-uncatchable = ['SIG_DFL','SIGSTOP','SIGKILL']
-for i in [x for x in dir(signal) if x.startswith("SIG")]:
-    if not i in uncatchable:
-        signum = getattr(signal,i)
-        signal.signal(signum,receive_signal)
+signal.signal(signal.SIGTERM, signal_term_handler)
 
 print 'my pid is ' + str(os.getpid())
 print "RESIN envvars\n"
@@ -30,5 +21,5 @@ for key in os.environ.keys():
 
 print 'Now I\'m just gonna wait around here for something to happen...'
 while True:
-    time.sleep(30)
+    time.sleep(10)
     print "still waiting around..."
