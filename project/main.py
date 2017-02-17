@@ -8,8 +8,10 @@ import time
 def receive_signal(signum, stack):
     if signum in [1,2,3,15]:
         with open("/data/signals.log", "a+") as f:
-            f.write('Caught signal %s, exiting.' %(str(signum)))
-        print 'Caught signal %s, exiting.' %(str(signum))
+            f.write('Caught signal %s, cleaning up and exiting main.py.' %(str(signum)))
+            f.flush()
+            os.fsync(f.fileno())
+        print 'Caught signal %s, cleaning up and exiting main.py.' %(str(signum))
         sys.exit(0)
     else:
         print 'Caught signal %s, ignoring.' %(str(signum))

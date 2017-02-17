@@ -1,7 +1,7 @@
 local_resinos:
-  app-name: simple-demo
+  app-name: container-lifecycle
   build-triggers:
-    - Dockerfile: a8b15066d355f70bc41a0f88e7cd8f33364a0c1b5b133664f7c86c4ee0433765
+    - Dockerfile: d25e2278ae0d36537205b8586424e4d5a5538adfe6e1aeec7395af242e6b02f7
   environment:
     - RESIN_vars=There Are None for resinOS Unmanaged
 destination: /usr/src/app

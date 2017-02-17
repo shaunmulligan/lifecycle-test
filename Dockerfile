@@ -1,5 +1,7 @@
-FROM resin/raspberrypi3-python:2.7-slim
+# Base our container on a Slim Python + Debian (Jessie) Image
+FROM resin/raspberrypi3-python:2.7
 
+# Set our working directory
 WORKDIR /usr/src/app
 
 # Copy all our project into /usr/src/app/ folder in the container.
@@ -9,4 +11,7 @@ COPY . .
 #           |── Dockerfile
 #           └── project
 #               └── main.py
+
+ENV INITSYSTEM=on
+
 CMD ["python","-u","project/main.py"]
