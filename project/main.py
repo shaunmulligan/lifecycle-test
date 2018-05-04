@@ -12,6 +12,7 @@ except IOError:
     file = open("/data/signals.log", 'w')
 
 def signal_term_handler(signal, frame):
+    ts = time.time()
     st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
     with open("/data/signals.log","a+") as f:
         f.write(st + ' got SIGTERM, cleaning up main.py\n')
@@ -19,6 +20,7 @@ def signal_term_handler(signal, frame):
     sys.exit(0)
 
 def signal_int_handler(signal, frame):
+    ts = time.time()
     st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
     with open("/data/signals.log","a+") as f:
         f.write(st + ' got SIGINT, cleaning up main.py\n')
