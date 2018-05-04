@@ -15,12 +15,14 @@ def signal_term_handler(signal, frame):
     print('got SIGTERM, cleaning up main.py\n', flush=True)
     with open("/data/signals.log","a+") as f:
         f.write('got SIGTERM, cleaning up main.py\n')
+        f.flush()
     # sys.exit(0)
 
 def signal_int_handler(signal, frame):
     print('got SIGINT, cleaning up main.py\n', flush=True)
     with open("/data/signals.log","a+") as f:
         f.write('got SIGINT, cleaning up main.py\n')
+        f.flush()
     # sys.exit(0)
 
 signal.signal(signal.SIGTERM, signal_term_handler)
