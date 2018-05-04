@@ -1,5 +1,5 @@
 # Base our container on a Slim Python + Debian (Jessie) Image
-FROM resin/raspberrypi3-python:2.7
+FROM resin/raspberrypi3-python:3.6-slim
 
 # Set our working directory
 WORKDIR /usr/src/app
