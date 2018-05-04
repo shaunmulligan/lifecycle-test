@@ -8,10 +8,12 @@ except IOError:
     file = open("/data/signals.txt", 'w')
 
 def wf():
-    with open('/data/signals.txt', 'w') as f:
+    with open('/data/signals.txt', 'a+') as f:
+        print("closed all resources\n", flush=True)
         f.write("Closed resources!")
-        print("closed all resources", flush=True)
         f.flush()
+
+        
 
 def quit_gracefully(*args):
     wf()
