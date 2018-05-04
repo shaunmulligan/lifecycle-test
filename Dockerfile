@@ -13,6 +13,4 @@ COPY . .
 #               |── startup.sh
 #               └── main.py
 
-ENV INITSYSTEM=on
-
 CMD ["bash","project/startup.sh"]
