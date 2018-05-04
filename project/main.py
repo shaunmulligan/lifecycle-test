@@ -10,7 +10,7 @@ except IOError:
 def wf():
     with open('/data/signals.txt', 'a+') as f:
         print("closed all resources\n", flush=True)
-        f.write("Closed resources!")
+        f.write("Closed resources!\n")
         f.flush()
 
         
