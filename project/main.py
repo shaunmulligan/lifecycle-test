@@ -1,40 +1,25 @@
-#!/usr/bin/env python
-# main.py
-
-import signal
-import sys, os
 import time
-import datetime
+import sys
+import signal
 
 try:
-    file = open("/data/signals.log", 'r')
+    file = open("/data/signals.txt", 'r')
 except IOError:
-    file = open("/data/signals.log", 'w')
+    file = open("/data/signals.txt", 'w')
 
-def signal_term_handler(signal, frame):
-    print('got SIGTERM, cleaning up main.py\n', flush=True)
-    with open("/data/signals.log","a+") as f:
-        f.write('got SIGTERM, cleaning up main.py\n')
+def wf():
+    with open('/data/signals.txt', 'w') as f:
+        f.write("Closed resources!")
+        print("closed all resources", flush=True)
         f.flush()
-    # sys.exit(0)
 
-def signal_int_handler(signal, frame):
-    print('got SIGINT, cleaning up main.py\n', flush=True)
-    with open("/data/signals.log","a+") as f:
-        f.write('got SIGINT, cleaning up main.py\n')
-        f.flush()
-    # sys.exit(0)
+def quit_gracefully(*args):
+    wf()
+    sys.exit(-1)
 
-signal.signal(signal.SIGTERM, signal_term_handler)
-signal.signal(signal.SIGINT, signal_int_handler)
+signal.signal(signal.SIGINT, quit_gracefully)
+signal.signal(signal.SIGTERM, quit_gracefully)
 
-print('my pid is ' + str(os.getpid()))
-# print("RESIN envvars\n")
-# for key in os.environ.keys():
-#     if 'RESIN' in key:
-#         print(key, os.environ[key])
-
-print('Now I\'m just gonna wait around here for something to happen...')
 while True:
+    print("I am alive!")
     time.sleep(30)
-    print("still waiting around...")
