@@ -4,6 +4,7 @@
 import signal
 import sys, os
 import time
+import datetime
 
 try:
     file = open("/data/signals.log", 'r')
@@ -11,14 +12,16 @@ except IOError:
     file = open("/data/signals.log", 'w')
 
 def signal_term_handler(signal, frame):
+    st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
     with open("/data/signals.log","a+") as f:
-        f.write('got SIGTERM, cleaning up main.py\n')
+        f.write(st + ' got SIGTERM, cleaning up main.py\n')
     print('got SIGTERM, cleaning up main.py\n', flush=True)
     sys.exit(0)
 
 def signal_int_handler(signal, frame):
+    st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
     with open("/data/signals.log","a+") as f:
-        f.write('got SIGINT, cleaning up main.py\n')
+        f.write(st + ' got SIGINT, cleaning up main.py\n')
     print('got SIGINT, cleaning up main.py\n', flush=True)
     sys.exit(0)
 
